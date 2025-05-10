@@ -15,10 +15,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useAuth } from "@/hooks/useAuth";
-import { useRouter } R_OK_CHANGE_TEXT_MODE_FLAGfrom 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useToast } from "@/hooks/use-toast";
 import Link from "next/link";
-import { MapIcon, UserPlus } from "lucide-react";
+import { UserPlus } from "lucide-react"; // Removed MapIcon as it's not used
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 const formSchema = z.object({
@@ -55,7 +55,7 @@ export function SignupForm() {
     // In a real app, this would be an API call to create a user
     try {
       // For mock purposes, create a user object. A real API would return this.
-      const mockUser = { id: `mock-${Date.now()}`, email: values.email, name: values.name, role: values.accountType };
+      const mockUser = { id: `mock-${Date.now()}`, email: values.email, name: values.name, role: values.accountType as "user" | "business_owner" };
       login(mockUser);
       toast({
         title: "Signup Successful",
@@ -166,7 +166,7 @@ export function SignupForm() {
                     </RadioGroup>
                   </FormControl>
                   <FormMessage />
-                </FormItem
+                </FormItem>
               )}
             />
             <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
